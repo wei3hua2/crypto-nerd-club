@@ -24,9 +24,7 @@ jobs:
           key: v2-dependencies-{{ checksum "package.json" }}
           paths:
               - node_modules
-      
-      - run: npm test
-
+    #   - run: npm test
       - run:
           name: Building
           command: |
