@@ -5,7 +5,7 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:8.11
     steps:
       - checkout
 
@@ -47,7 +47,7 @@ jobs:
   deploy:
     working_directory: ~/repo
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:8.11
     steps:
         - run:
             name: Show current branch
@@ -85,4 +85,6 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only:
+                - master
+                - develop
