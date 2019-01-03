@@ -74,17 +74,15 @@ jobs:
                     aws --region us-east-1 s3 sync dist s3://cryptonerdclub.com/ --delete
                 fi
 
+
 workflows:
   version: 2
   build_and_deploy:
     jobs:
       - build
       - deploy:
-        requires:
-          - build
-        filters:
-          branches:
-            only:
-              - develop
-              - staging
-              - master
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
