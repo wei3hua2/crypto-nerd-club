@@ -8,8 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-dev": "ng build --target=development --environment=dev",
-    "build-qa": "ng build --target=production --environment=qa",
+    "build-dev": "ng build",
     "build-prod": "ng build --prod"
   },
   "private": true,
