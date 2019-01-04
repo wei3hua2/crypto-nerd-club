@@ -1,0 +1,5 @@
+<exchange-summary [exchange]="exchange | async"></exchange-summary>
+
+<exchange-pairs
+    [exchange]="exchange | async" (cellClick)="clickRow($event)">
+</exchange-pairs>

@@ -1,0 +1,9 @@
+<mat-grid-list cols="2" rowHeight="400px">
+    <mat-grid-tile>
+        <dashboard-chart name="Global Volume" [series]="(glob | async).volumes"></dashboard-chart>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <dashboard-chart name="Global Market Caps" [series]="(glob | async).marketCaps"></dashboard-chart>
+    </mat-grid-tile>
+  </mat-grid-list>
+
