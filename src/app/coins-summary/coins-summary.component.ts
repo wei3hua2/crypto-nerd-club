@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'developments-summary',
-  templateUrl: './developments-summary.component.html',
-  styleUrls: ['./developments-summary.component.sass']
+  selector: 'coins-summary',
+  templateUrl: './coins-summary.component.html',
+  styleUrls: ['./coins-summary.component.sass']
 })
-export class DevelopmentsSummaryComponent implements OnInit {
+export class CoinsSummaryComponent implements OnInit {
 
   @Input()
   title: string;

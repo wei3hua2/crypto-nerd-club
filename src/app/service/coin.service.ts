@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {CoinDashboard, Currency, OHLCV, Settings} from './models';
+import {CoinDashboard, Currency, OHLCV, Settings} from '../models';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import * as  _ from 'lodash';
 import * as moment from 'moment';
 
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CoinService {
@@ -62,7 +62,6 @@ export class CoinService {
       );
   }
 
-  //pair information
   nomicMarkets(): Observable<any[]> {
     const nomic_api = this.getSettings().nomics_api_key;
 

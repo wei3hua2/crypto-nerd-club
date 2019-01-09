@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import {CoinDashboard} from '../models';
-import { Observable } from 'rxjs';
-import * as _ from 'lodash';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { Coin } from '../models';
 import { Router } from '@angular/router';
 import * as fromRoot from '../reducers';
-import { LoadDashboard } from '../actions/coin.actions';
+import { Store } from '@ngrx/store';
+import { EsService } from '../service/es.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-coins',
@@ -14,29 +15,36 @@ import { LoadDashboard } from '../actions/coin.actions';
 })
 export class CoinsComponent implements OnInit {
 
-  coins: Observable<CoinDashboard[]>;
-
+  coins: Observable<Coin[]>;
   rows = [];
+  orgs: Observable<any>;
+  summary: Observable<any>;
 
   constructor(
+    private esSvc: EsService,
     private store: Store<fromRoot.State>,
-    private router: Router) {}
-
-  ngOnInit() {
-
-    this.store.dispatch(new LoadDashboard);
-
-    this.coins = this.store.select<CoinDashboard[]>(state => state.coin.dashboards);
-
-    this.coins.subscribe(data => {
-      this.rows = _.sortBy(data, d => d.close);
-      this.rows = _.reverse(this.rows);
-    });
+    private router: Router) {
   }
 
-  onCellClick(data: any) {
-    if ( data.type === 'click') {
-      this.router.navigate([ '/coin', data.row.currency ]);
+  ngOnInit() {
+    this.orgs = this.esSvc.search({index: 'orgs', size: 1000}).pipe(
+      switchMap((result) => {
+        return of(_.map(result.hits, '_source'));
+      })
+    );
+
+    this.summary = this.orgs.pipe(
+      switchMap((result) => {
+        return of(_.map(result, function (row) {
+          return {'name': row.login, 'value': row.public_repos};
+        }));
+      })
+    );
+  }
+
+  onCellClick(evt) {
+    if ( evt.type === 'click') {
+      this.router.navigate([ '/coin', evt.row.login ]);
     }
   }
 

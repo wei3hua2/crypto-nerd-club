@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CoinService } from '../coin.service';
+import { CoinService } from '../service/coin.service';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';

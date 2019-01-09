@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GhService } from '../gh.service';
+import { GhService } from '../service/gh.service';
 import { Observable, from } from 'rxjs';
 
 @Component({

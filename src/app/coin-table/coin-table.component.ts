@@ -2,11 +2,11 @@ import { Component, OnInit, Input, EventEmitter,
   TemplateRef, ViewChild, Output } from '@angular/core';
 
 @Component({
-  selector: 'development-table',
-  templateUrl: './development-table.component.html',
-  styleUrls: ['./development-table.component.sass']
+  selector: 'coin-table',
+  templateUrl: './coin-table.component.html',
+  styleUrls: ['./coin-table.component.sass']
 })
-export class DevelopmentTableComponent implements OnInit {
+export class CoinTableComponent implements OnInit {
 
   @Input()
   rows;

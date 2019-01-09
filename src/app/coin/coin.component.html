@@ -1,6 +1,7 @@
+<coin-summary [coin]="(org | async)?.data">
+</coin-summary>
 
-
-<coin-chart 
-  name="Coin Chart"
-  [series]="ohclv$ | async">
-</coin-chart>
+<repos-table
+    [rows]="(repos | async)?.data"
+    (cellClick)="onCellClick($event)">
+</repos-table>
