@@ -1,0 +1,34 @@
+<ngx-datatable #mydatatable
+    class="material" 
+    [limit]="50" [columnMode]="'force'" [summaryRow]="true" [summaryHeight]="'auto'"
+    [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+    [rows]="rows" [columns]="columns"
+    [sorts]="[{prop: 'stargazers_count', dir: 'desc'}]"
+    (activate)="cellClick.emit($event)">
+</ngx-datatable>
+
+<ng-template #summaryStarCell let-row="row" let-value="value">
+  <ngx-charts-bar-horizontal [results]="getStars()">
+  </ngx-charts-bar-horizontal>
+</ng-template>
+
+<ng-template #repoCell let-rowIndex="rowIndex" let-value="value" let-row="row" ngx-datatable-cell-template>
+    <mat-grid-list cols="4" rowHeight="150px">
+        <mat-grid-tile class="repo-grid-align" colspan=3 rowspan=1>
+            <h1 mat-line class="mat-headline">{{row.name}}</h1>
+            <p mat-line class="mat-body-1">{{row.description}}</p>
+            <div mat-line>
+                <span>
+                    <mat-icon style="vertical-align:bottom">star</mat-icon>
+                    <span>{{row.stargazers_count | number}}</span>
+                </span>
+                <span style="padding-left:20px;">{{row.language}}</span>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan=1 rowspan=1>
+            <!-- <mat-icon>star</mat-icon> -->
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-divider mat-line></mat-divider>
+</ng-template>

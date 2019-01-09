@@ -62,3 +62,7 @@ export interface Pair {
     price_quote?: number;
     timestamp?: Date;
 }
+
+export interface Development {
+    currency: string;
+}

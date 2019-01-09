@@ -17,7 +17,8 @@ export class CoinService {
 
   settings: Settings;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   initSettings(): Observable<Settings> {
 

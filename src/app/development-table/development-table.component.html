@@ -1,0 +1,27 @@
+
+<form>
+    <mat-form-field class="full-width">
+        <input matInput type='text' placeholder='Type to search for project...'/>
+        <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+</form>
+
+<ngx-datatable #mydatatable
+    class="material" 
+    [limit]="50" [columnMode]="'force'"
+    [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+    [rows]="rows" [columns]="columns"
+    [sorts]="[{prop: 'updated_at', dir: 'desc'}]"
+    (activate)="cellClick.emit($event)">
+</ngx-datatable>
+
+<ng-template #loginCell let-rowIndex="rowIndex" let-value="value" let-row="row" ngx-datatable-cell-template>
+    <div>
+        <img class="avatar" src={{row.avatar_url}}>
+        <span> {{value}} </span>
+    </div>
+</ng-template>
+
+<ng-template #dateCell let-value="value" ngx-datatable-cell-template>
+    {{value | date: 'MM/dd/yyyy'}}
+</ng-template>

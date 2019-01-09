@@ -7,8 +7,16 @@ import {CoinComponent} from './coin/coin.component';
 import {ExchangesComponent} from './exchanges/exchanges.component';
 import {ExchangeComponent} from './exchange/exchange.component';
 import {ChartComponent} from './chart/chart.component';
+import {DevelopmentsComponent} from './developments/developments.component';
+import {DevelopmentComponent} from './development/development.component';
+import {RepoComponent} from './repo/repo.component';
+import {PeopleComponent} from './people/people.component';
 
 const routes: Routes = [
+  { path: 'developments', component: DevelopmentsComponent },
+  { path: 'development/:id', component: DevelopmentComponent },
+  { path: 'repo/:owner/:id', component: RepoComponent },
+  { path: 'people/:id', component: PeopleComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'coins', component: CoinsComponent },
   { path: 'coin/:currency', component: CoinComponent },
@@ -18,7 +26,7 @@ const routes: Routes = [
   { path: 'chart/:currency', component: ChartComponent },
   { path: 'chart/:exchange/:base/:quote', component: ChartComponent },
   { path: 'correlation', component: CorrelationComponent },
-  { path: '', redirectTo: '/coins', pathMatch: 'full' }
+  { path: '', redirectTo: '/developments', pathMatch: 'full' }
 ];
 
 @NgModule({

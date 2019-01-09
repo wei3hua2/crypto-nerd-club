@@ -1,0 +1,10 @@
+<mat-card *ngIf="development as dev">
+    <mat-card-header>
+      <img mat-card-avatar [src]="dev.avatar_url">
+      <mat-card-title>{{dev.name}}</mat-card-title>
+      <mat-card-subtitle>{{dev.description}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- <pre>{{dev | json}}</pre> -->
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,9 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{title}}</mat-card-title>
+  </mat-card-header>
+    <ngx-charts-advanced-pie-chart *ngIf="chartType === 'advanced-pie'"
+      [label]="'Repositories'"
+      [results]="devs">
+    </ngx-charts-advanced-pie-chart>
+</mat-card>

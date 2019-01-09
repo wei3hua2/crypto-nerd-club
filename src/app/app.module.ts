@@ -4,9 +4,11 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import {MatButtonModule, MatTableModule, MatCheckboxModule, MatGridListModule,
-  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatSelectModule} from '@angular/material';
+  MatMenuModule, MatToolbarModule, MatFormFieldModule, MatSelectModule, MatListModule,
+  MatIconModule, MatCardModule, MatTabsModule, MatChipsModule, MatInputModule} from '@angular/material';
 
-  import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import * as highstock from 'highcharts/modules/stock.src';
@@ -37,6 +39,14 @@ import { CoinChartComponent } from './coin-chart/coin-chart.component';
 import { Angulartics2Module } from 'angulartics2';
 
 import { CoinService } from './coin.service';
+import { DevelopmentsComponent } from './developments/developments.component';
+import { DevelopmentComponent } from './development/development.component';
+import { DevelopmentTableComponent } from './development-table/development-table.component';
+import { ReposTableComponent } from './repos-table/repos-table.component';
+import { RepoComponent } from './repo/repo.component';
+import { PeopleComponent } from './people/people.component';
+import { DevelopmentSummaryComponent } from './development-summary/development-summary.component';
+import { DevelopmentsSummaryComponent } from './developments-summary/developments-summary.component';
 
 export function get_settings(coinService: CoinService) {
   return () => coinService.initSettings().toPromise();
@@ -58,13 +68,21 @@ export function get_settings(coinService: CoinService) {
     CoinsTableComponent,
     ExchangesTableComponent,
     ExchangePairsComponent,
-    CoinChartComponent
+    CoinChartComponent,
+    DevelopmentsComponent,
+    DevelopmentComponent,
+    DevelopmentTableComponent,
+    ReposTableComponent,
+    RepoComponent,
+    PeopleComponent,
+    DevelopmentSummaryComponent,
+    DevelopmentsSummaryComponent
   ],
   imports: [
-    BrowserAnimationsModule, AppRoutingModule,
+    BrowserAnimationsModule, AppRoutingModule, NgxChartsModule, MatInputModule,
     MatButtonModule, MatCheckboxModule, MatMenuModule, MatToolbarModule, MatFormFieldModule,
-    MatGridListModule, MatTableModule, NgxDatatableModule, MatSelectModule,
-    ChartModule, HttpClientModule,
+    MatGridListModule, MatTableModule, NgxDatatableModule, MatSelectModule, MatListModule,
+    MatIconModule, MatCardModule, MatTabsModule, MatChipsModule, ChartModule, HttpClientModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([CoinEffects]),

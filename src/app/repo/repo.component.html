@@ -1,0 +1,112 @@
+<mat-card class="example-card" *ngIf="(repo | async)?.data as rep">
+  <mat-card-header>
+    <img mat-card-avatar [src]="rep.owner.avatar_url">
+    <mat-card-title>{{rep.name}}</mat-card-title>
+    <mat-card-subtitle>{{rep.stargazers_count | number}} stars</mat-card-subtitle>
+    <mat-card-subtitle>
+      <mat-chip-list *ngIf="(topics | async)?.data.names as tps">
+          <mat-chip color="accent" selected *ngFor="let topic of tps">{{topic}}</mat-chip>
+      </mat-chip-list>
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      <mat-chip-list *ngIf="(languages | async)?.data as langs">
+          <mat-chip color="primary" selected *ngFor="let lang of langs | keyvalue">{{lang.key}}:{{lang.value}}</mat-chip>
+      </mat-chip-list>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab label="Information">
+          <mat-list>
+            <mat-list-item>
+              <mat-icon mat-list-icon>face</mat-icon>
+              <p mat-line>{{rep.name}}</p>
+              <p mat-line>{{rep.description}}</p>
+            </mat-list-item>
+
+            <mat-list-item>
+                <mat-icon mat-list-icon>star</mat-icon>
+                <p mat-line>Star Count</p>
+                <p mat-line>{{rep.stargazers_count | number}}</p>
+            </mat-list-item>
+
+            <mat-list-item>
+                <mat-icon mat-list-icon>vertical_align_top</mat-icon>
+                <p mat-line>Forks</p>
+                <p mat-line>{{rep.forks_count | number}}</p>
+            </mat-list-item>
+            
+            <mat-list-item>
+                <mat-icon mat-list-icon>gavel</mat-icon>
+                <p mat-line>{{rep.license?.name}}</p>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon mat-list-icon>hourglass_empty</mat-icon>
+              <h4 mat-line>Created At</h4>
+              <p mat-line>{{rep.created_at | date:'dd/MM/yyyy, h:mm a'}}</p>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon mat-list-icon>hourglass_full</mat-icon>
+              <h4 mat-line>Last Update</h4>
+              <p mat-line>{{rep.updated_at | date:'dd/MM/yyyy, h:mm a'}}</p>
+            </mat-list-item>
+          </mat-list>
+
+          <!-- <pre>{{rep | json}}</pre> -->
+        </mat-tab>
+
+        <mat-tab label="Commits">
+          <mat-list *ngIf="(commits | async)?.data as cmts">
+            <mat-list-item *ngFor="let cmt of cmts">
+              <img matListAvatar [src]="cmt.committer?.avatar_url">
+              <p mat-line>{{cmt.commit.committer?.date | date:'dd/MM/yyyy, h:mm a'}}</p>
+              <p mat-line>{{cmt.commit.message}}</p>
+              <p mat-line>{{cmt.commit.committer.name}}</p>
+              <p mat-line>{{cmt.commit.committer.email}}</p>
+            </mat-list-item>
+          </mat-list>
+          <!-- <pre>{{commits | async | json}}</pre> -->
+        </mat-tab>
+
+        <mat-tab label="Contributors"> 
+          <mat-list *ngIf="(contributors | async)?.data as contris">
+            <mat-list-item *ngFor="let contri of contris" routerLink="/people/{{contri.login}}">
+              <img matListAvatar [src]="contri.avatar_url" alt="">
+              <mat-icon *ngIf="contri.site_admin">star</mat-icon>
+              <h2 mat-line>{{contri.login}}</h2>
+              <p mat-line>{{contri.contributions}}</p>
+              <!-- {{contri.followers}} -->
+              <!-- {{contri.followings}} -->
+              <!-- {{contri.stars}} -->
+              <!-- {{contri.orgs}} -->
+              <!-- {{contri.repos}} -->
+              <!-- {{contri.isadmin}} -->
+              <!-- {{contri.contributions}} -->
+            </mat-list-item>
+          </mat-list>
+          <!-- <pre>{{contributors | async | json}}</pre> -->
+        </mat-tab>
+
+        <mat-tab label="Releases">
+          <mat-list *ngIf="(releases | async)?.data as rels">
+            <mat-list-item *ngFor="let release of rels">
+              <p mat-line class="mat-title">{{release.name}}</p>
+              <p mat-line class="mat-body-strong">{{release.body}}</p>
+              <p mat-line class="mat-caption">{{release.published_at | date}}</p>
+              <mat-divider mat-line></mat-divider>
+              
+              <!-- <div mat-line>
+                <img matListAvatar [src]="release.author.avatar_url" alt="">
+                <p>{{release.author.login}}</p>
+              </div> -->
+            </mat-list-item>
+          </mat-list>
+          <!-- <pre>{{releases | async | json}}</pre> -->
+        </mat-tab>
+      </mat-tab-group>
+  </mat-card-content>
+</mat-card>
+
+
