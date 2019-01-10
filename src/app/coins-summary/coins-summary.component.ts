@@ -18,12 +18,16 @@ export class CoinsSummaryComponent implements OnInit {
   }
   get chartType(){ return this._chartType; }
 
-  _devs;
-  @Input('devs')
-  set devs(devs){
-    this._devs = devs;
+  noOfRepos;
+  _dashboard;
+  @Input('dashboard')
+  set dashboard(db) {
+    this._dashboard = db;
+    this.noOfRepos = db.noOfRepositories;
   }
-  get devs(){ return this._devs; }
+  get dashboard() {
+    return this._dashboard;
+  }
 
   constructor() {}
 

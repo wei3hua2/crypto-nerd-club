@@ -27,14 +27,14 @@ export class CoinTableComponent implements OnInit {
   ngOnInit() {
 
     this.columns = [
-      {prop: 'login', name: '', cellTemplate: this.loginCell},
+      {prop: 'ghLogin', name: '', cellTemplate: this.loginCell},
       // {prop: 'name', name: 'Name'},
-      {prop: 'marketcaps', name: 'Market Cap'},
+      {prop: 'marketCap', name: 'Market Cap'},
       {prop: 'price', name: 'Price ($)'},
       {prop: 'public_repos', name: 'No. of Repositories'},
       {prop: 'noOfOpenIssues', name: 'No. of open issues'},
       {prop: 'noOfContris', name: 'No. of contributors'},
-      {prop: 'noOfCommits24h', name: 'No. of commits (15d)'},
+      {prop: 'noOfCommits7d', name: 'No. of commits (7d)'},
       {prop: 'created_at', name: 'Created At', cellTemplate: this.dateCell}];
       // {prop: 'updated_at', name: 'Updated At', cellTemplate: this.dateCell}
       // {prop: 'close', name: 'Close', cellTemplate: this.currencyCell},

@@ -3,7 +3,6 @@
     <mat-card-title>{{title}}</mat-card-title>
   </mat-card-header>
     <ngx-charts-advanced-pie-chart *ngIf="chartType === 'advanced-pie'"
-      [label]="'Repositories'"
-      [results]="devs">
+      [label]="'Repositories'" [results]="noOfRepos">
     </ngx-charts-advanced-pie-chart>
 </mat-card>

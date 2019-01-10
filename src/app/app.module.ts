@@ -22,7 +22,7 @@ import { CoinEffects } from './effects/coin.effect';
 
 import { Angulartics2Module } from 'angulartics2';
 
-import { CoinService } from './service/coin.service';
+// import { CoinService } from './service/coin.service';
 import { CoinsComponent } from './coins/coins.component';
 import { CoinComponent } from './coin/coin.component';
 import { CoinTableComponent } from './coin-table/coin-table.component';
@@ -32,9 +32,9 @@ import { PeopleComponent } from './people/people.component';
 import { CoinSummaryComponent } from './coin-summary/coin-summary.component';
 import { CoinsSummaryComponent } from './coins-summary/coins-summary.component';
 
-export function get_settings(coinService: CoinService) {
-  return () => coinService.initSettings().toPromise();
-}
+// export function get_settings(coinService: CoinService) {
+//   return () => coinService.initSettings().toPromise();
+// }
 
 @NgModule({
   declarations: [
@@ -59,8 +59,8 @@ export function get_settings(coinService: CoinService) {
     EffectsModule.forRoot([CoinEffects]),
     Angulartics2Module.forRoot()],
   providers: [
-    CoinService,
-    { provide: APP_INITIALIZER, useFactory: get_settings, deps: [CoinService], multi: true },
+    // CoinService,
+    // { provide: APP_INITIALIZER, useFactory: get_settings, deps: [CoinService], multi: true },
     ],
   bootstrap: [AppComponent]
 })

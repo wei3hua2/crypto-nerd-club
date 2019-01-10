@@ -1,5 +1,5 @@
 <coins-summary 
-    [devs]="summary | async"
+    [dashboard]="dashboard | async"
     title="Number of Repositories"
     [chartType]="'advanced-pie'">
 </coins-summary>
@@ -7,5 +7,5 @@
 <div style="padding-top:30px;"></div>
 
 <coin-table
-    [rows]="orgs | async" (cellClick)="onCellClick($event)">
+    [rows]="coins | async" (cellClick)="onCellClick($event)">
 </coin-table>
