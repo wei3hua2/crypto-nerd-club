@@ -41,9 +41,9 @@ export class ReposTableComponent implements OnInit {
       // {'prop': 'description', 'name': 'Description'},
       // {'prop': 'language', 'name': 'Language'},
       {'prop': 'stargazers_count', 'name': 'Projects', cellTemplate: this.repoCell,
-      headerTemplate: this.headerT, summaryFunc: () => null }
-      // {'prop': 'forks', 'name': 'Forks'},
-      // {'prop': 'open_issues_count', 'name': 'Open Issue'}
+        headerTemplate: this.headerT, summaryFunc: () => null},
+      {'prop': 'created_at', 'name': 'Created at'},
+      {'prop': 'open_issues_count', 'name': 'Open Issue'}
       ];
   }
 

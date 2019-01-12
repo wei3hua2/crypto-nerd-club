@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, from } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../reducers';
-import { LoadRepoGH } from '../actions/coin.actions';
+import { LoadRepoGH, LoadRepoContrisGH } from '../actions/coin.actions';
 
 @Component({
   selector: 'app-repo',
@@ -47,11 +47,16 @@ export class RepoComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new LoadRepoGH({owner: this.ownerId, repo: this.repoId}));
+    this.store.dispatch(new LoadRepoContrisGH({owner: this.ownerId, repo: this.repoId}));
 
     this.repo = this.store.select<any>(state => state.coin.repoDetail);
+    this.contributors = this.store.select<any>(state => state.coin.repoDetail.contributors);
+    this.commits = this.store.select<any>(state => state.coin.repoDetail.commits);
+    this.releases = this.store.select<any>(state => state.coin.repoDetail.releases);
+
+    // this.contributors = from(this.ghSvc.repos.listContributors({owner: this.ownerId, repo: this.repoId}));
     // this.repo = from(this.ghSvc.repos.get({owner: this.ownerId, repo: this.repoId}));
     // this.commits = from(this.ghSvc.repos.listCommits({owner: this.ownerId, repo: this.repoId}));
-    // this.contributors = from(this.ghSvc.repos.listContributors({owner: this.ownerId, repo: this.repoId}));
     // this.releases = from(this.ghSvc.repos.listReleases({owner: this.ownerId, repo: this.repoId}));
 
 
@@ -66,6 +71,10 @@ export class RepoComponent implements OnInit {
     // this.deployments = from(this.ghSvc.repos.listDeployments({owner: this.ownerId, repo: this.repoId}));
     // this.downloads = from(this.ghSvc.repos.listDownloads({owner: this.ownerId, repo: this.repoId}));
     // this.branches = from(this.ghSvc.repos.listBranches({owner: this.ownerId, repo: this.repoId}));
+  }
+
+  contriClicked($event) {
+    console.log($event);
   }
 
 }

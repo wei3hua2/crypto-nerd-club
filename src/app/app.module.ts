@@ -31,6 +31,7 @@ import { RepoComponent } from './repo/repo.component';
 import { PeopleComponent } from './people/people.component';
 import { CoinSummaryComponent } from './coin-summary/coin-summary.component';
 import { CoinsSummaryComponent } from './coins-summary/coins-summary.component';
+import { RepoContributorsComponent } from './repo-contributors/repo-contributors.component';
 
 // export function get_settings(coinService: CoinService) {
 //   return () => coinService.initSettings().toPromise();
@@ -47,7 +48,8 @@ import { CoinsSummaryComponent } from './coins-summary/coins-summary.component';
     RepoComponent,
     PeopleComponent,
     CoinSummaryComponent,
-    CoinsSummaryComponent
+    CoinsSummaryComponent,
+    RepoContributorsComponent
   ],
   imports: [
     BrowserAnimationsModule, AppRoutingModule, NgxChartsModule, MatInputModule,

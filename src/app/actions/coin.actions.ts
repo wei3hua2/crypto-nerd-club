@@ -21,7 +21,19 @@ export enum CoinActionTypes {
   LoadRepoListSuccess = '[Coin] Load Repo List Success',
 
   LoadRepoGH = '[Coin] Load Repo GH',
-  LoadRepoGHSuccess = '[Coin] Load Repo GH Success'
+  LoadRepoGHSuccess = '[Coin] Load Repo GH Success',
+
+  LoadRepoContrisGH = '[Coin] Load Repo Contris GH',
+  LoadRepoContrisGHSuccess = '[Coin] Load Repo Contris GH Success',
+
+  LoadRepoCommitsGH = '[Coin] Load Repo Commits GH',
+  LoadRepoCommitsGHSuccess = '[Coin] Load Repo Commits GH Success',
+
+  LoadRepoReleasesGH = '[Coin] Load Repo Releases GH',
+  LoadRepoReleasesGHSuccess = '[Coin] Load Repo Releases GH Success',
+
+  LoadRepoIssuesGH = '[Coin] Load Repo Issues GH',
+  LoadRepoIssuesGHSuccess = '[Coin] Load Repo Issues GH Success'
 }
 
 export class LoadMainCoinsData implements Action {
@@ -87,8 +99,46 @@ export class LoadRepoGHSuccess implements Action {
   constructor(public payload: any) {}
 }
 
+export class LoadRepoContrisGH implements Action {
+  readonly type = CoinActionTypes.LoadRepoContrisGH;
+  constructor(public payload: any) {}
+}
+export class LoadRepoContrisGHSuccess implements Action {
+  readonly type = CoinActionTypes.LoadRepoContrisGHSuccess;
+  constructor(public payload: any) {}
+}
+
+export class LoadRepoCommitsGH implements Action {
+  readonly type = CoinActionTypes.LoadRepoCommitsGH;
+  constructor(public payload: any) {}
+}
+export class LoadRepoCommitsGHSuccess implements Action {
+  readonly type = CoinActionTypes.LoadRepoCommitsGHSuccess;
+  constructor(public payload: any) {}
+}
+
+export class LoadRepoReleasesGH implements Action {
+  readonly type = CoinActionTypes.LoadRepoReleasesGH;
+  constructor(public payload: any) {}
+}
+export class LoadRepoReleasesGHSuccess implements Action {
+  readonly type = CoinActionTypes.LoadRepoReleasesGHSuccess;
+  constructor(public payload: any) {}
+}
+
+export class LoadRepoIssuesGH implements Action {
+  readonly type = CoinActionTypes.LoadRepoIssuesGH;
+  constructor(public payload: any) {}
+}
+export class LoadRepoIssuesGHSuccess implements Action {
+  readonly type = CoinActionTypes.LoadRepoIssuesGHSuccess;
+  constructor(public payload: any) {}
+}
+
 export type CoinActions = LoadMainCoinsData |
   LoadMainCoinsDataSuccess | LoadMarketPriceData | LoadMarketPriceDataSuccess |
   LoadMainCoin | LoadMainCoinSuccess | LoadRepoList | LoadRepoListSuccess |
   LoadCoinGH | LoadCoinGHSuccess | LoadCoinMemberGH | LoadCoinMemberGHSuccess |
-  LoadRepoGH | LoadRepoGHSuccess;
+  LoadRepoGH | LoadRepoGHSuccess | LoadRepoContrisGH | LoadRepoContrisGHSuccess |
+  LoadRepoCommitsGH | LoadRepoCommitsGHSuccess | LoadRepoReleasesGH | LoadRepoReleasesGHSuccess |
+  LoadRepoIssuesGH | LoadRepoIssuesGHSuccess;

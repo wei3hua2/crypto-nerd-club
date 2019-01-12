@@ -54,6 +54,15 @@ export function reducer(state = initialState, action: coinActions.CoinActions): 
     case coinActions.CoinActionTypes.LoadRepoGHSuccess:
       return handleRepoGHSuccess(state, action);
 
+    case coinActions.CoinActionTypes.LoadRepoContrisGHSuccess:
+      return handleRepoContrisGHSuccess(state, action);
+
+    case coinActions.CoinActionTypes.LoadRepoCommitsGHSuccess:
+      return handleRepoCommitsGHSuccess(state, action);
+
+    case coinActions.CoinActionTypes.LoadRepoReleasesGHSuccess:
+      return handleRepoRelGHSuccess(state, action);
+
     default:
       return state;
   }
@@ -182,6 +191,34 @@ function handleRepoGHSuccess(state, action) {
   const repoGH = action.payload.data;
   const detail = _.assign(state.repoDetail, repoGH);
 
+  return {
+    ...state,
+    repoDetail: detail
+  };
+}
+
+function handleRepoContrisGHSuccess(state, action) {
+  const detail = _.cloneDeep(state.repoDetail);
+  detail.contributors = action.payload.data;
+
+  return {
+    ...state,
+    repoDetail: detail
+  };
+}
+
+function handleRepoCommitsGHSuccess(state, action) {
+  const detail = _.cloneDeep(state.repoDetail);
+  detail.commits = action.payload.data;
+  return {
+    ...state,
+    repoDetail: detail
+  };
+}
+
+function handleRepoRelGHSuccess(state, action) {
+  const detail = _.cloneDeep(state.repoDetail);
+  detail.releases = action.payload.data;
   return {
     ...state,
     repoDetail: detail

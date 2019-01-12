@@ -122,4 +122,56 @@ export class CoinEffects {
           );
         })
     );
+
+    @Effect()
+    loadRepoContriGithub$: Observable<Action> = this.actions$.pipe(
+      ofType(coinActions.CoinActionTypes.LoadRepoContrisGH),
+      switchMap(
+        (action) => {
+          return from(this.ghSvc.repos.listContributors(action['payload'])).pipe(
+            map((result: any) => {
+              return new coinActions.LoadRepoContrisGHSuccess(result);
+            })
+          );
+        })
+    );
+
+    @Effect()
+    loadRepoCommitsGithub$: Observable<Action> = this.actions$.pipe(
+      ofType(coinActions.CoinActionTypes.LoadRepoCommitsGH),
+      switchMap(
+        (action) => {
+          return from(this.ghSvc.repos.listCommits(action['payload'])).pipe(
+            map((result: any) => {
+              return new coinActions.LoadRepoCommitsGHSuccess(result);
+            })
+          );
+        })
+    );
+
+    @Effect()
+    loadRepoReleasesGithub$: Observable<Action> = this.actions$.pipe(
+      ofType(coinActions.CoinActionTypes.LoadRepoReleasesGH),
+      switchMap(
+        (action) => {
+          return from(this.ghSvc.repos.listReleases(action['payload'])).pipe(
+            map((result: any) => {
+              return new coinActions.LoadRepoReleasesGHSuccess(result);
+            })
+          );
+        })
+    );
+
+    // @Effect()
+    // loadRepoIssuesGithub$: Observable<Action> = this.actions$.pipe(
+    //   ofType(coinActions.CoinActionTypes.LoadRepoContrisGH),
+    //   switchMap(
+    //     (action) => {
+    //       return from(this.ghSvc.repos.listContributors(action['payload'])).pipe(
+    //         map((result: any) => {
+    //           return new coinActions.LoadRepoContrisGHSuccess(result);
+    //         })
+    //       );
+    //     })
+    // );
 }

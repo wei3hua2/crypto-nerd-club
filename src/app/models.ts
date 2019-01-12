@@ -67,6 +67,8 @@ export interface RepositoryDetail extends RepositoryBase {
 
     commits?: Commit[];
     issues?: Issue[];
+    contributors?: Contributor[];
+    releases?: Release[];
 }
 export interface RepositoryBase {
     id?: string;
@@ -75,11 +77,21 @@ export interface RepositoryBase {
 export interface Commit {
     id: string;
 }
+export interface Release {
+    name: string;
+    body: string;
+    published_at: Date;
+}
 export interface Issue {
     id: string;
 }
 export interface License {
     id: string;
+}
+export interface Contributor {
+    login: string;
+    avatar_url: string;
+
 }
 // export interface Event {}
 // export interface Comment {}

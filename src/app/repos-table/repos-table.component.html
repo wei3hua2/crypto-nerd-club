@@ -1,6 +1,6 @@
 <ngx-datatable #mydatatable
     class="material" 
-    [limit]="50" [columnMode]="'force'" [summaryRow]="false" [summaryHeight]="'auto'"
+    [limit]="200" [columnMode]="'force'" [summaryRow]="false" [summaryHeight]="'auto'"
     [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
     [rows]="rows" [columns]="columns"
     [sorts]="[{prop: 'stargazers_count', dir: 'desc'}]"
@@ -27,6 +27,9 @@
                     <span>{{row.stargazers_count | number}}</span>
                 </span>
                 <span style="padding-left:20px;">{{row.language}}</span>
+            </div>
+            <div mat-line>
+                <span>updated on : {{row.updated_at | date}}</span>
             </div>
         </mat-grid-tile>
         <mat-grid-tile colspan=1 rowspan=1>

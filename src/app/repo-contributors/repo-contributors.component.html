@@ -1,0 +1,15 @@
+<div>
+    <img class="img-comp" *ngFor="let member of contributors"
+      [matTooltip]="member.login + ' ( ' + member.contributions + ' )'"
+      (click)="clickContri.emit(member)"
+      mat-card-avatar [src]="member.avatar_url">
+</div>
+
+<!-- <mat-list *ngIf="contributors as contris">
+  <mat-list-item *ngFor="let contri of contris" routerLink="/people/{{contri.login}}">
+    <img matListAvatar [src]="contri.avatar_url" alt="">
+    <mat-icon *ngIf="contri.site_admin">star</mat-icon>
+    <h2 mat-line>{{contri.login}}</h2>
+    <p mat-line>{{contri.contributions}} commits</p>
+  </mat-list-item>
+</mat-list> -->
