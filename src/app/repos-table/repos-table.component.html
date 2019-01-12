@@ -1,6 +1,6 @@
 <ngx-datatable #mydatatable
     class="material" 
-    [limit]="50" [columnMode]="'force'" [summaryRow]="true" [summaryHeight]="'auto'"
+    [limit]="50" [columnMode]="'force'" [summaryRow]="false" [summaryHeight]="'auto'"
     [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
     [rows]="rows" [columns]="columns"
     [sorts]="[{prop: 'stargazers_count', dir: 'desc'}]"
@@ -10,6 +10,10 @@
 <ng-template #summaryStarCell let-row="row" let-value="value">
   <ngx-charts-bar-horizontal [results]="getStars()">
   </ngx-charts-bar-horizontal>
+</ng-template>
+
+<ng-template #headerTemplate let-col="col">
+    <h3>No of Repositories : ({{ rows?.length }})</h3>
 </ng-template>
 
 <ng-template #repoCell let-rowIndex="rowIndex" let-value="value" let-row="row" ngx-datatable-cell-template>

@@ -1,7 +1,7 @@
-<coin-summary [coin]="(org | async)?.data">
+<coin-summary [coin]="coin | async" [dashboard]="dashboard | async">
 </coin-summary>
 
 <repos-table
-    [rows]="(repos | async)?.data"
+    [rows]="repos | async"
     (cellClick)="onCellClick($event)">
 </repos-table>

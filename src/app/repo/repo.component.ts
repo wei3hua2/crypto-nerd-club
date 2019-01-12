@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { GhService } from '../service/gh.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, from } from 'rxjs';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../reducers';
+import { LoadRepoGH } from '../actions/coin.actions';
 
 @Component({
   selector: 'app-repo',
@@ -10,6 +13,7 @@ import { Observable, from } from 'rxjs';
 })
 export class RepoComponent implements OnInit {
 
+  symbol: string;
   repoId: string;
   ownerId: string;
 
@@ -33,23 +37,28 @@ export class RepoComponent implements OnInit {
   ];
 
   constructor(
-    private ghSvc: GhService,
+    private store: Store<fromRoot.State>,
     private route: ActivatedRoute
   ) {
+    this.symbol = this.route.snapshot.paramMap.get('symbol');
     this.repoId = this.route.snapshot.paramMap.get('id');
     this.ownerId = this.route.snapshot.paramMap.get('owner');
   }
 
   ngOnInit() {
-    this.repo = from(this.ghSvc.repos.get({owner: this.ownerId, repo: this.repoId}));
-    this.commits = from(this.ghSvc.repos.listCommits({owner: this.ownerId, repo: this.repoId}));
-    this.commits.subscribe(console.log);
-    this.contributors = from(this.ghSvc.repos.listContributors({owner: this.ownerId, repo: this.repoId}));
+    this.store.dispatch(new LoadRepoGH({owner: this.ownerId, repo: this.repoId}));
+
+    this.repo = this.store.select<any>(state => state.coin.repoDetail);
+    // this.repo = from(this.ghSvc.repos.get({owner: this.ownerId, repo: this.repoId}));
+    // this.commits = from(this.ghSvc.repos.listCommits({owner: this.ownerId, repo: this.repoId}));
+    // this.contributors = from(this.ghSvc.repos.listContributors({owner: this.ownerId, repo: this.repoId}));
+    // this.releases = from(this.ghSvc.repos.listReleases({owner: this.ownerId, repo: this.repoId}));
+
+
     // this.topics = from(this.ghSvc.repos.listTopics({owner: this.ownerId, repo: this.repoId, headers: {
     //   accept: 'application/vnd.github.mercy-preview+json'
     // }}));
     // this.tags = from(this.ghSvc.repos.listTags({owner: this.ownerId, repo: this.repoId}));
-    this.releases = from(this.ghSvc.repos.listReleases({owner: this.ownerId, repo: this.repoId}));
     // this.languages = from(this.ghSvc.repos.listLanguages({owner: this.ownerId, repo: this.repoId}));
     // this.teams = from(this.ghSvc.repos.listTeams({owner: this.ownerId, repo: this.repoId}));
     // this.forks = from(this.ghSvc.repos.listForks({owner: this.ownerId, repo: this.repoId}));

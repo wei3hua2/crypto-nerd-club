@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {MatButtonModule, MatTableModule, MatCheckboxModule, MatGridListModule,
   MatMenuModule, MatToolbarModule, MatFormFieldModule, MatSelectModule, MatListModule,
-  MatIconModule, MatCardModule, MatTabsModule, MatChipsModule, MatInputModule} from '@angular/material';
+  MatTooltipModule, MatIconModule, MatCardModule, MatTabsModule, MatChipsModule, MatInputModule} from '@angular/material';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -53,7 +53,7 @@ import { CoinsSummaryComponent } from './coins-summary/coins-summary.component';
     BrowserAnimationsModule, AppRoutingModule, NgxChartsModule, MatInputModule,
     MatButtonModule, MatCheckboxModule, MatMenuModule, MatToolbarModule, MatFormFieldModule,
     MatGridListModule, MatTableModule, NgxDatatableModule, MatSelectModule, MatListModule,
-    MatIconModule, MatCardModule, MatTabsModule, MatChipsModule, HttpClientModule,
+    MatTooltipModule, MatIconModule, MatCardModule, MatTabsModule, MatChipsModule, HttpClientModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([CoinEffects]),

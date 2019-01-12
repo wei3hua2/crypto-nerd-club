@@ -11,6 +11,9 @@ export class CoinsSummaryComponent implements OnInit {
   @Input()
   title: string;
 
+  @Input()
+  label: string;
+
   _chartType;
   @Input('chartType')
   set chartType(chartType) {
@@ -18,12 +21,12 @@ export class CoinsSummaryComponent implements OnInit {
   }
   get chartType(){ return this._chartType; }
 
-  noOfRepos;
   _dashboard;
   @Input('dashboard')
   set dashboard(db) {
-    this._dashboard = db;
-    this.noOfRepos = db.noOfRepositories;
+    this._dashboard = _.filter(db, (v) => !!v.value);
+    this._dashboard = _.reverse(_.sortBy(this._dashboard, 'value'));
+    this._dashboard = _.take(this._dashboard, 5);
   }
   get dashboard() {
     return this._dashboard;

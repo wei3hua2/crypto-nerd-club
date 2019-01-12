@@ -17,6 +17,9 @@ export class CoinTableComponent implements OnInit {
   @ViewChild('dateCell')
   dateCell: TemplateRef<any>;
 
+  @ViewChild('currencyCell')
+  currencyCell: TemplateRef<any>;
+
   columns;
 
   @Output()
@@ -27,10 +30,9 @@ export class CoinTableComponent implements OnInit {
   ngOnInit() {
 
     this.columns = [
-      {prop: 'ghLogin', name: '', cellTemplate: this.loginCell},
-      // {prop: 'name', name: 'Name'},
-      {prop: 'marketCap', name: 'Market Cap'},
-      {prop: 'price', name: 'Price ($)'},
+      {prop: 'name', name: '', cellTemplate: this.loginCell},
+      {prop: 'marketCap', name: 'Market Cap', cellTemplate: this.currencyCell},
+      {prop: 'price', name: 'Price ($)', cellTemplate: this.currencyCell},
       {prop: 'public_repos', name: 'No. of Repositories'},
       {prop: 'noOfOpenIssues', name: 'No. of open issues'},
       {prop: 'noOfContris', name: 'No. of contributors'},

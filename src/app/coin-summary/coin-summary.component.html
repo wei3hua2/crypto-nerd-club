@@ -5,6 +5,15 @@
       <mat-card-subtitle>{{dev.description}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <!-- <pre>{{dev | json}}</pre> -->
+      <div>
+        <img *ngFor="let member of members" 
+          [matTooltip]="member.login"
+          class="avatar" mat-card-avatar [src]="member.avatar_url">
+      </div>
+      <!-- <div>
+          <ngx-charts-advanced-pie-chart
+            [results]="dashboard?.noOfRepoStars">
+          </ngx-charts-advanced-pie-chart>
+      </div> -->
     </mat-card-content>
 </mat-card>

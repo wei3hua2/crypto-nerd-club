@@ -8,7 +8,7 @@ import {PeopleComponent} from './people/people.component';
 const routes: Routes = [
   { path: '', component: CoinsComponent },
   { path: 'coin/:id', component: CoinComponent },
-  { path: 'repo/:owner/:id', component: RepoComponent },
+  { path: 'repo/:symbol/:owner/:id', component: RepoComponent },
   { path: 'people/:id', component: PeopleComponent }
   // { path: '', redirectTo: '/coins', pathMatch: 'full' }
 ];

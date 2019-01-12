@@ -1,8 +1,14 @@
 <coins-summary 
-    [dashboard]="dashboard | async"
-    title="Number of Repositories"
+    [dashboard]="(dashboard | async)?.marketCaps"
+    title="Market Cap Top 5"
     [chartType]="'advanced-pie'">
 </coins-summary>
+
+<!-- <coins-summary 
+    [dashboard]="(dashboard | async)?.noOfRepositories"
+    title="Number of Repositories Top 5"
+    [chartType]="'advanced-pie'">
+</coins-summary> -->
 
 <div style="padding-top:30px;"></div>
 

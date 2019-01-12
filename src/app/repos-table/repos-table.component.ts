@@ -9,8 +9,14 @@ import * as _ from 'lodash';
 })
 export class ReposTableComponent implements OnInit {
 
-  @Input()
-  rows;
+  _rows;
+  @Input('rows')
+  set rows(r) {
+    this._rows = r;
+  }
+  get rows() {
+    return this._rows;
+  }
 
   @Output()
   cellClick: EventEmitter<any> = new EventEmitter<any>();
@@ -20,6 +26,9 @@ export class ReposTableComponent implements OnInit {
 
   @ViewChild('summaryStarCell')
   summaryStarCell: TemplateRef<any>;
+
+  @ViewChild('headerTemplate')
+  headerT: TemplateRef<any>;
 
   columns;
 
@@ -32,7 +41,7 @@ export class ReposTableComponent implements OnInit {
       // {'prop': 'description', 'name': 'Description'},
       // {'prop': 'language', 'name': 'Language'},
       {'prop': 'stargazers_count', 'name': 'Projects', cellTemplate: this.repoCell,
-        summaryFunc: () => null, summaryTemplate: this.summaryStarCell }
+      headerTemplate: this.headerT, summaryFunc: () => null }
       // {'prop': 'forks', 'name': 'Forks'},
       // {'prop': 'open_issues_count', 'name': 'Open Issue'}
       ];

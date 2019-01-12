@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { CoinListItem, CoinsDashboard } from '../models';
 import { Router } from '@angular/router';
 import * as fromRoot from '../reducers';
 import { Store } from '@ngrx/store';
 import { EsService } from '../service/es.service';
 import * as _ from 'lodash';
-import { LoadMainCoinsData } from '../actions/coin.actions';
+import { LoadMainCoinsData, LoadMarketPriceData } from '../actions/coin.actions';
+import { CoinStatus } from '../reducers/coin.reducer';
 
 @Component({
   selector: 'app-coins',
@@ -18,6 +19,7 @@ export class CoinsComponent implements OnInit {
 
   coins: Observable<CoinListItem[]>;
   dashboard: Observable<CoinsDashboard>;
+  status: Observable<CoinStatus>;
 
   constructor(
     private esSvc: EsService,
@@ -27,32 +29,24 @@ export class CoinsComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new LoadMainCoinsData({}));
-    // this.store.dispatch(new LoadCoinsDashboard());
 
     this.coins = this.store.select<CoinListItem[]>(state => state.coin.coinTableList);
     this.dashboard = this.store.select<CoinsDashboard>(state => state.coin.coinsDashboard);
+    this.status = this.store.select<CoinStatus>(state => state.coin.status);
 
-    // this.coins.subscribe(console.log);
-    this.dashboard.subscribe(console.log);
-
-
-    // this.orgs = this.esSvc.search({index: 'orgs', size: 1000}).pipe(
-    //   switchMap((result) => {
-    //     return of(_.map(result.hits, '_source'));
-    //   })
-    // );
-    // this.summary = this.orgs.pipe(
-    //   switchMap((result) => {
-    //     return of(_.map(result, function (row) {
-    //       return {'name': row.login, 'value': row.public_repos};
-    //     }));
-    //   })
-    // );
+    this.status.subscribe((stat) => {
+      if (stat.init_main_coins && !stat.loaded_coins_price) {
+        this.coins.pipe(first()).subscribe((coins) => {
+          const syms = _.map(coins, 'symbol');
+          this.store.dispatch(new LoadMarketPriceData({symbols: syms}));
+        });
+      }
+    });
   }
 
   onCellClick(evt) {
     if ( evt.type === 'click') {
-      this.router.navigate([ '/coin', evt.row.login ]);
+      this.router.navigate([ '/coin', evt.row.symbol ]);
     }
   }
 

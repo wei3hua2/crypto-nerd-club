@@ -11,7 +11,7 @@
     [limit]="50" [columnMode]="'force'"
     [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
     [rows]="rows" [columns]="columns"
-    [sorts]="[{prop: 'updated_at', dir: 'desc'}]"
+    [sorts]="[{prop: 'marketCap', dir: 'desc'}]"
     (activate)="cellClick.emit($event)">
 </ngx-datatable>
 
@@ -24,4 +24,8 @@
 
 <ng-template #dateCell let-value="value" ngx-datatable-cell-template>
     {{value | date: 'MM/dd/yyyy'}}
+</ng-template>
+
+<ng-template #currencyCell let-value="value" ngx-datatable-cell-template>
+    {{value | currency}}
 </ng-template>

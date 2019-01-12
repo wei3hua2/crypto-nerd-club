@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as Octokit from '@octokit/rest';
-
+import { ConfigService } from './config.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,8 +8,12 @@ export class GhService {
 
   github;
 
-  constructor() {
-    this.github = new Octokit();
+  constructor(config: ConfigService) {
+    this.github = new Octokit({
+      headers: {
+        Authorization: config.getGithubAPIKey()
+      }
+    });
   }
 
   get orgs () {

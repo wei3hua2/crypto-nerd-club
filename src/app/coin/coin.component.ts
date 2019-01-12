@@ -6,7 +6,9 @@ import { EsService } from '../service/es.service';
 import { GhService } from '../service/gh.service';
 import { Observable, of, from } from 'rxjs';
 import * as _ from 'lodash';
-import { switchMap } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
+import { LoadMainCoin, LoadRepoList, LoadCoinGH,
+  LoadCoinMemberGH } from '../actions/coin.actions';
 
 @Component({
   selector: 'coin',
@@ -15,38 +17,47 @@ import { switchMap } from 'rxjs/operators';
 })
 export class CoinComponent implements OnInit {
 
-  id: string;
-  org: Observable<any>;
+  symbol: string;
+  // org: Observable<any>;
+
+  coin: Observable<any>;
   repos: Observable<any[]>;
+  ghLogin: Observable<string>;
+  coinGithub: Observable<any>;
+  dashboard: Observable<any>;
 
   constructor(
-    private esSvc: EsService,
-    private ghSvc: GhService,
     private route: ActivatedRoute,
     private rtr: Router,
     private store: Store<fromRoot.State>
   ) {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.symbol = this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit() {
-    // this.org = this.esSvc.get({index: 'orgs', type: '_doc', id: this.id});
-    // this.repos = this.esSvc.search({
-    //   index: 'repos', type: '_doc', size: 1000,
-    //   q: 'owner.id:' + this.id}).pipe(
-    //     switchMap((result) => {
-    //       return of(_.map(result.hits, '_source'));
-    //     })
-    //   );
-    this.org = from(this.ghSvc.orgs.get({org: this.id}));
-    this.repos = from(this.ghSvc.repos.listForOrg({org: this.id, per_page: 100}));
-    // this.org.subscribe(console.log);
-    // this.repos.subscribe(console.log);
+    this.store.dispatch(new LoadMainCoin(this.symbol));
+
+    this.coin = this.store.select<any>(state => state.coin.coinDetail);
+    this.repos = this.store.select<any>(state => state.coin.coinDetail.repos);
+    this.ghLogin = this.store.select<string>(state => state.coin.coinDetail.ghLogin);
+    this.coinGithub = this.store.select<any>(state => state.coin.coinDetail.github);
+
+    this.dashboard = this.store.select<any>(state => state.coin.coinDashboard);
+
+    this.ghLogin.subscribe((ghLogin) => {
+      if (ghLogin) {
+        this.store.dispatch(new LoadRepoList(ghLogin));
+        this.store.dispatch(new LoadCoinGH(ghLogin));
+        this.store.dispatch(new LoadCoinMemberGH(ghLogin));
+      }
+    });
   }
 
   onCellClick(evt) {
     if ( evt.type === 'click') {
-      this.rtr.navigate([ '/repo', this.id, evt.row.name ]);
+      this.ghLogin.pipe(first()).subscribe(
+        (ghLogin) => this.rtr.navigate([ '/repo', this.symbol, ghLogin, evt.row.name ])
+      );
     }
   }
 

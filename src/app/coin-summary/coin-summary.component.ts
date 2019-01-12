@@ -6,8 +6,21 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./coin-summary.component.sass']
 })
 export class CoinSummaryComponent implements OnInit {
+
+  members;
+
   @Input()
-  coin;
+  dashboard;
+
+  _coin;
+  @Input('coin')
+  set coin(coin){
+    this._coin = coin;
+    this.members = coin.githubMembers;
+  }
+  get coin(){
+    return this._coin;
+  }
 
   constructor() {}
 

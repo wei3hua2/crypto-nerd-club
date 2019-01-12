@@ -1,8 +1,15 @@
 export interface CoinsDashboard {
     noOfRepositories?: {name: string, value: number}[];
+    marketCaps?: {name: string, value: number}[];
 }
 export interface CoinDashboard {
-    id: string;
+    noOfRepoStars?: {name: string, value: number}[];
+}
+
+export interface CoinDetail extends CoinListItem {
+    github: OrgGH;
+    githubMembers: MemberGH[];
+    repos: RepositoryListItem[];
 }
 
 export interface CoinListItem extends CoinBase {
@@ -16,6 +23,8 @@ export interface CoinListItem extends CoinBase {
 
     price: number;
     marketCap: number;
+    availableSupply: number;
+    maxSupply: number;
     volume: number;
     priceTimestamp: Date;
 
@@ -30,36 +39,38 @@ export interface CoinBase {
 
 // export interface RepositoryDashboard extends RepositoryBase {}
 
-// export interface RepositoryListItem extends RepositoryBase {}
+export interface RepositoryListItem extends RepositoryBase {
+    hello: string;
+}
 
 export interface RepositoryDetail extends RepositoryBase {
-    full_name: string;
-    description: string;
-    fork: number;
-    owner: Developer;
-    created_at: Date;
-    updated_at: Date;
-    homepage: string;
-    stargazers_count: number;
-    watchers_count: number;
-    language: string;
-    forks_count: number;
-    open_issues_count: number;
-    default_branch: string;
+    full_name?: string;
+    description?: string;
+    fork?: number;
+    owner?: Developer;
+    created_at?: Date;
+    updated_at?: Date;
+    homepage?: string;
+    stargazers_count?: number;
+    watchers_count?: number;
+    language?: string;
+    forks_count?: number;
+    open_issues_count?: number;
+    default_branch?: string;
 
-    archived: boolean;
-    has_projects: boolean;
-    has_downloads: boolean;
-    has_wiki: boolean;
-    has_page: boolean;
-    has_issues: boolean;
+    archived?: boolean;
+    has_projects?: boolean;
+    has_downloads?: boolean;
+    has_wiki?: boolean;
+    has_page?: boolean;
+    has_issues?: boolean;
 
-    commits: Commit[];
-    issues: Issue[];
+    commits?: Commit[];
+    issues?: Issue[];
 }
 export interface RepositoryBase {
-    id: string;
-    name: string;
+    id?: string;
+    name?: string;
 }
 export interface Commit {
     id: string;
@@ -99,7 +110,10 @@ export interface OrgGH {
     created_at: Date;
     updated_at: Date;
 }
-
+export interface MemberGH {
+    login: string;
+    avatar_url: string;
+}
 
 
 

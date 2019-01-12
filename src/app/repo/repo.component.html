@@ -1,18 +1,24 @@
-<mat-card class="example-card" *ngIf="(repo | async)?.data as rep">
+<mat-card class="example-card" *ngIf="(repo | async) as rep">
   <mat-card-header>
     <img mat-card-avatar [src]="rep.owner.avatar_url">
     <mat-card-title>{{rep.name}}</mat-card-title>
-    <mat-card-subtitle>{{rep.stargazers_count | number}} stars</mat-card-subtitle>
+
+    <mat-card-subtitle>
+      {{rep.stargazers_count | number}} stars {{repo.forks | number}} forks
+    </mat-card-subtitle>
+
     <mat-card-subtitle>
       <mat-chip-list *ngIf="(topics | async)?.data.names as tps">
           <mat-chip color="accent" selected *ngFor="let topic of tps">{{topic}}</mat-chip>
       </mat-chip-list>
     </mat-card-subtitle>
+
     <mat-card-subtitle>
       <mat-chip-list *ngIf="(languages | async)?.data as langs">
           <mat-chip color="primary" selected *ngFor="let lang of langs | keyvalue">{{lang.key}}:{{lang.value}}</mat-chip>
       </mat-chip-list>
     </mat-card-subtitle>
+
   </mat-card-header>
   <mat-card-content>
       <mat-tab-group animationDuration="0ms">
